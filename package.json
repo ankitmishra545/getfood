@@ -1,0 +1,23 @@
+{
+  "name": "getfood",
+  "version": "1.0.0",
+  "description": "creating food ordering app",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "food",
+    "fast",
+    "food"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
