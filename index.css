@@ -36,6 +36,7 @@ img{
 }
 
 .restaurant-card{
+    cursor: pointer;
     background-color: bisque;
     padding: 5px;
     margin: 5px;
@@ -65,4 +66,13 @@ img{
 .top-rated{
     margin: 10px;
     border: 1px solid gray;
+}
+
+.shimmer-card{
+    height: 400px;
+}
+
+.shimmer-card-container{
+    display: flex;
+    flex-wrap: wrap;
 }
