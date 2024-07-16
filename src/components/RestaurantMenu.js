@@ -37,7 +37,7 @@ const RestaurantMenu = () => {
             <p>{cuisines.join(", ")}</p>
 
             <div>
-                {itemCards.map(item => <li>{item.card.info.name} - {"Rs." +item.card.info.defaultPrice/100}</li>)}
+                {itemCards.map(item => <li key={item.card.info.id}>{item.card.info.name} - {"Rs." +item.card.info.defaultPrice/100}</li>)}
             </div>
 
         </div>
