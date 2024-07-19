@@ -6,9 +6,11 @@ import { MdStars } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
 import { GiFlowerEmblem } from "react-icons/gi";
 import RestaurantMenuCategory from "./RestaurantMenuCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
+  const [showItemsList, setShowItemsList] = useState(0);
 
   const fetchedData = useFetchData(RESTAURANT_API + resId);
 
@@ -22,9 +24,6 @@ const RestaurantMenu = () => {
     sla,
     cuisines,
   } = fetchedData.cards[2].card.card.info;
-
-  // const { itemCards } =
-  //   fetchedData.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
 
   const ItemCategory =
     fetchedData.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter(
@@ -66,11 +65,14 @@ const RestaurantMenu = () => {
       </div>
 
       <div>
-        {ItemCategory.map((category) => {
+        {ItemCategory.map((category, index) => {
           return (
             <RestaurantMenuCategory
               key={category.card.card.title}
               menuData={category}
+              showItemsList={showItemsList === index}
+              setShowItemsList={setShowItemsList}
+              index={index}
             />
           );
         })}

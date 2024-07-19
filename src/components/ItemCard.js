@@ -9,8 +9,8 @@ const ItemCard = ({ menu }) => {
           menuItem?.card?.info;
         const { rating = 0, ratingCountV2 = 0 } = ratings?.aggregatedRating;
         return (
-          <div className="px-3">
-            <div className="flex " key={id}>
+          <div className="px-3" key={id}>
+            <div className="flex ">
               <div className="w-9/12 px-2 flex flex-col justify-center">
                 <p className="font-semibold text-lg">{name}</p>
                 <p className="font-semibold text-lg">

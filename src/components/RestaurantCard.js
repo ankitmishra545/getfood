@@ -2,31 +2,61 @@ import { MEDIA_LINKS } from "../utils/constant";
 import { MdStars } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
 
-const RestaurantCard = ({resData}) => {
-    const {name, avgRating, locality, costForTwo, cloudinaryImageId, cuisines, sla} = resData?.info; 
-    return (
-        <div className='w-[300px] mx-2 p-1 h-[400px]'>
-            <div>
-            <img src={MEDIA_LINKS+cloudinaryImageId} className="rounded-xl w-full h-[200px] object-cover"/>
-            </div>
-            <div className="mt-4 ml-4">
-            <h4 className="font-bold text-lg">{name}</h4>
-            <div className='rating-delivery-time flex'>
-                <div className="flex">
-                    <span><MdStars color="green" size="1.5em" /></span>
-                    <span className="ml-1">{avgRating}</span>
-                </div>
-                <div className="font-semibold flex">
-                    <span><LuDot size="1.5em" /></span>
-                    <span>{sla.slaString}</span>
-                </div>
-            </div>
-            <h4 className="text-[#02060C99] font-medium">{costForTwo}</h4>
-            <div className="truncate text-[#02060C99]  font-medium">{cuisines.join(",")}</div>
-            <div  className="text-[#02060C99]  font-medium">{locality}</div>
-            </div>
+const RestaurantCard = ({ resData }) => {
+  const {
+    name,
+    avgRating,
+    locality,
+    costForTwo,
+    cloudinaryImageId,
+    cuisines,
+    sla,
+  } = resData?.info;
+  return (
+    <div className="w-[300px] mx-2 p-1 h-[400px]">
+      <div>
+        <img
+          src={MEDIA_LINKS + cloudinaryImageId}
+          className="rounded-xl w-full h-[200px] object-cover"
+        />
+      </div>
+      <div className="mt-4 ml-4">
+        <h4 className="font-bold text-lg">{name}</h4>
+        <div className="rating-delivery-time flex">
+          <div className="flex">
+            <span>
+              <MdStars color="green" size="1.5em" />
+            </span>
+            <span className="ml-1">{avgRating}</span>
+          </div>
+          <div className="font-semibold flex">
+            <span>
+              <LuDot size="1.5em" />
+            </span>
+            <span>{sla.slaString}</span>
+          </div>
         </div>
-    )
+        <h4 className="text-[#02060C99] font-medium">{costForTwo}</h4>
+        <div className="truncate text-[#02060C99]  font-medium">
+          {cuisines.join(",")}
+        </div>
+        <div className="text-[#02060C99]  font-medium">{locality}</div>
+      </div>
+    </div>
+  );
+};
+
+export const withPromotedLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="bg-black text-white px-2 py-1 absolute text-xs">
+          {props.resData.info.aggregatedDiscountInfoV3.header}
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestaurantCard;
