@@ -1,12 +1,39 @@
+import { useDispatch, useSelector } from "react-redux";
 import { MEDIA_LINKS } from "../utils/constant";
 import { IoStar } from "react-icons/io5";
+import { FaMinus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import { addItem, removeItem } from "../store/cartSlice";
 
 const ItemCard = ({ menu }) => {
-  console.log(menu);
+  const dispatch = useDispatch();
+
+  const itemsInCart = useSelector((store) => store.cart);
+
+  const totalItems = itemsInCart.reduce((acc, curr) => {
+    if (acc[curr.id]) {
+      acc[curr.id] = ++acc[curr.id];
+    } else {
+      acc[curr.id] = 1;
+    }
+    return acc;
+  }, {});
+
+  console.log(totalItems);
+
+  const addItemToCart = (item) => {
+    dispatch(addItem(item));
+  };
+
+  const removeItemFromCart = (e, id) => {
+    e.preventDefault();
+    console.log("remove item clicked");
+    dispatch(removeItem(id));
+  };
+
   return (
-    <div className="">
+    <>
       {menu.map((menuItem) => {
-        // console.log(menuItem?.card?.info);
         const { id, name, price, defaultPrice, description, imageId, ratings } = menuItem?.card?.info;
         const { rating = 0, ratingCountV2 = 0 } = ratings?.aggregatedRating;
         return (
@@ -29,8 +56,25 @@ const ItemCard = ({ menu }) => {
               </div>
               <div className="w-3/12 p-5 flex flex-col items-center">
                 <img src={MEDIA_LINKS + imageId} className="w-full" />
-                <button className="w-[100px] p-1 relative flex justify-center bg-slate-100 font-bold text-green-600 border shadow-xl bottom-9">
-                  ADD
+                <button
+                  className="w-[100px] p-1 relative flex justify-center bg-slate-100 font-bold text-green-600 border shadow-xl bottom-9"
+                  onClick={() => addItemToCart(menuItem?.card?.info)}
+                >
+                  {totalItems[id] ? (
+                    <div className="flex justify-around items-center">
+                      <div className="w-[30px] flex justify-center" onClick={(e) => removeItemFromCart(e, id)}>
+                        <FaMinus />
+                      </div>
+                      <div className="w-[30px] flex justify-center " onClick={(e) => e.preventDefault()}>
+                        {totalItems[id]}
+                      </div>
+                      <div className="w-[30px] flex justify-center">
+                        <FaPlus />
+                      </div>
+                    </div>
+                  ) : (
+                    "ADD"
+                  )}
                 </button>
               </div>
             </div>
@@ -38,7 +82,7 @@ const ItemCard = ({ menu }) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 

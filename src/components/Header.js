@@ -2,10 +2,13 @@ import { useState } from "react";
 import { HEADER_LOGO } from "../utils/constant";
 import { Link } from "react-router-dom";
 import { IoFastFoodOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const [webName, setWebName] = useState("Grocery");
+
+  const numberOfItems = useSelector((store) => store.cart.length);
 
   return (
     <div className="w-full flex justify-between px-10 bg-pink-200">
@@ -31,10 +34,10 @@ const Header = () => {
         <li className="mx-3">
           <Link to="/contact">Contact Us</Link>
         </li>
-        <li className="mx-3 relative">
-          <IoFastFoodOutline size="2rem" color="#cc4137" fi />
+        <li className="mx-3 relative cursor-pointer">
+          <IoFastFoodOutline size="2rem" color="#cc4137" />
           <span className="absolute bottom-3 left-8 font-bold text-orange-800 text-lg bg-yellow-200 px-1 rounded-full">
-            3
+            {numberOfItems}
           </span>
         </li>
         <li className="mx-3">

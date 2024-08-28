@@ -39,7 +39,7 @@ export const withPromotedLabel = (RestaurantCard) => {
     return (
       <>
         {promotedText !== "ITEMS" && (
-          <label className="bg-black text-white px-2 py-1 absolute text-lg font-bold">{promotedText}</label>
+          <label className="bg-black text-white px-2 py-1 absolute text-lg font-bold rounded-lg">{promotedText}</label>
         )}
         <RestaurantCard {...props} />
       </>
