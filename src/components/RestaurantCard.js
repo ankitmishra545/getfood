@@ -3,22 +3,11 @@ import { MdStars } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
 
 const RestaurantCard = ({ resData }) => {
-  const {
-    name,
-    avgRating,
-    locality,
-    costForTwo,
-    cloudinaryImageId,
-    cuisines,
-    sla,
-  } = resData?.info;
+  const { name, avgRating, locality, costForTwo, cloudinaryImageId, cuisines, sla } = resData?.info;
   return (
-    <div className="w-[300px] mx-2 p-1 h-[400px]">
+    <div className="w-[300px] mb-3 mx-2 p-3 h-[400px] hover:bg-gray-100 hover:p-1">
       <div>
-        <img
-          src={MEDIA_LINKS + cloudinaryImageId}
-          className="rounded-xl w-full h-[200px] object-cover"
-        />
+        <img src={MEDIA_LINKS + cloudinaryImageId} className="rounded-xl w-full h-[200px] object-cover" />
       </div>
       <div className="mt-4 ml-4">
         <h4 className="font-bold text-lg">{name}</h4>
@@ -37,9 +26,7 @@ const RestaurantCard = ({ resData }) => {
           </div>
         </div>
         <h4 className="text-[#02060C99] font-medium">{costForTwo}</h4>
-        <div className="truncate text-[#02060C99]  font-medium">
-          {cuisines.join(",")}
-        </div>
+        <div className="truncate text-[#02060C99]  font-medium">{cuisines.join(",")}</div>
         <div className="text-[#02060C99]  font-medium">{locality}</div>
       </div>
     </div>
@@ -48,13 +35,14 @@ const RestaurantCard = ({ resData }) => {
 
 export const withPromotedLabel = (RestaurantCard) => {
   return (props) => {
+    const promotedText = props.resData.info.aggregatedDiscountInfoV3.header;
     return (
-      <div>
-        <label className="bg-black text-white px-2 py-1 absolute text-xs">
-          {props.resData.info.aggregatedDiscountInfoV3.header}
-        </label>
+      <>
+        {promotedText !== "ITEMS" && (
+          <label className="bg-black text-white px-2 py-1 absolute text-lg font-bold">{promotedText}</label>
+        )}
         <RestaurantCard {...props} />
-      </div>
+      </>
     );
   };
 };

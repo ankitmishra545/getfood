@@ -1,12 +1,7 @@
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import ItemCard from "./ItemCard";
 
-const RestaurantMenuCategory = ({
-  menuData,
-  showItemsList,
-  setShowItemsList,
-  index,
-}) => {
+const RestaurantMenuCategory = ({ menuData, showItemsList, setShowItemsList, index }) => {
   const { title, itemCards } = menuData.card.card;
 
   const handleShowItemsList = () => {
@@ -28,9 +23,7 @@ const RestaurantMenuCategory = ({
         </div>
         <div>{showItemsList ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
       </div>
-      <div className="w-full">
-        {showItemsList && <ItemCard menu={itemCards} />}
-      </div>
+      <div className="w-full">{showItemsList && <ItemCard menu={itemCards} />}</div>
     </div>
   );
 };

@@ -7,30 +7,19 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
-import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./store/appStore";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
 const App = () => {
-  const [userName, setUserName] = useState(null);
-
-  useEffect(() => {
-    // do api call to get userInfo and then set userName state
-    setUserName("Ankit");
-  }, []);
-
-  useEffect;
   return (
-    <div className="App">
-      {/* <UserContext.Provider value={{ loggedInUser: userName, setUserName }}> */}
-      {/*//passing setUserName as context to set name in below*/}
-
-      <Header />
-      {/* </UserContext.Provider> */}
-      <UserContext.Provider value={{ setUserName }}>
+    <Provider store={appStore}>
+      <div className="App">
+        <Header />
         <Outlet />
-      </UserContext.Provider>
-    </div>
+      </div>
+    </Provider>
   );
 };
 
