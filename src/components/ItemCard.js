@@ -19,15 +19,11 @@ const ItemCard = ({ menu }) => {
     return acc;
   }, {});
 
-  console.log(totalItems);
-
   const addItemToCart = (item) => {
     dispatch(addItem(item));
   };
 
   const removeItemFromCart = (e, id) => {
-    e.preventDefault();
-    console.log("remove item clicked");
     dispatch(removeItem(id));
   };
 
@@ -56,29 +52,33 @@ const ItemCard = ({ menu }) => {
               </div>
               <div className="w-3/12 p-5 flex flex-col items-center">
                 <img src={MEDIA_LINKS + imageId} className="w-full" />
-                <button
-                  className="w-[100px] p-1 relative flex justify-center bg-slate-100 font-bold text-green-600 border shadow-xl bottom-9"
-                  onClick={() => addItemToCart(menuItem?.card?.info)}
-                >
-                  {totalItems[id] ? (
-                    <div className="flex justify-around items-center">
-                      <div className="w-[30px] flex justify-center" onClick={(e) => removeItemFromCart(e, id)}>
-                        <FaMinus />
-                      </div>
-                      <div className="w-[30px] flex justify-center " onClick={(e) => e.preventDefault()}>
-                        {totalItems[id]}
-                      </div>
-                      <div className="w-[30px] flex justify-center">
-                        <FaPlus />
-                      </div>
-                    </div>
-                  ) : (
-                    "ADD"
-                  )}
-                </button>
+                {totalItems[id] ? (
+                  <div className="w-[100px] p-1 relative flex justify-center bg-slate-100 font-bold text-green-600 border shadow-xl bottom-9">
+                    <button
+                      className="w-[30px] flex justify-center items-center"
+                      onClick={(e) => removeItemFromCart(e, id)}
+                    >
+                      <FaMinus />
+                    </button>
+                    <div className="w-[30px] flex justify-center ">{totalItems[id]}</div>
+                    <button
+                      className="w-[30px] flex justify-center items-center"
+                      onClick={() => addItemToCart(menuItem?.card?.info)}
+                    >
+                      <FaPlus />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="w-[100px] p-1 relative flex justify-center bg-slate-100 font-bold text-green-600 border shadow-xl bottom-9"
+                    onClick={() => addItemToCart(menuItem?.card?.info)}
+                  >
+                    ADD
+                  </button>
+                )}
               </div>
             </div>
-            <p className="h-[1px] bg-gray-400"></p>
+            <p className="h-[1px] bg-gray-400" />
           </div>
         );
       })}
