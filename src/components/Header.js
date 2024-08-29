@@ -35,10 +35,12 @@ const Header = () => {
           <Link to="/contact">Contact Us</Link>
         </li>
         <li className="mx-3 relative cursor-pointer">
-          <IoFastFoodOutline size="2rem" color="#cc4137" />
-          <span className="absolute bottom-3 left-8 font-bold text-orange-800 text-lg bg-yellow-200 px-1 rounded-full">
-            {numberOfItems}
-          </span>
+          <Link to="/cart">
+            <IoFastFoodOutline size="2rem" color="#cc4137" />
+            <span className="absolute bottom-3 left-8 font-bold text-orange-800 text-lg bg-yellow-200 px-1 rounded-full">
+              {numberOfItems}
+            </span>
+          </Link>
         </li>
         <li className="mx-3">
           <button onClick={() => (btnName === "Login" ? setBtnName("Logout") : setBtnName("Login"))}>{btnName}</button>

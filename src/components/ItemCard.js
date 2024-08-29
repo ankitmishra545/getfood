@@ -1,32 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
 import { MEDIA_LINKS } from "../utils/constant";
 import { IoStar } from "react-icons/io5";
-import { FaMinus } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
-import { addItem, removeItem } from "../store/cartSlice";
+import CartAddButton from "./CartAddButton";
 
 const ItemCard = ({ menu }) => {
-  const dispatch = useDispatch();
-
-  const itemsInCart = useSelector((store) => store.cart);
-
-  const totalItems = itemsInCart.reduce((acc, curr) => {
-    if (acc[curr.id]) {
-      acc[curr.id] = ++acc[curr.id];
-    } else {
-      acc[curr.id] = 1;
-    }
-    return acc;
-  }, {});
-
-  const addItemToCart = (item) => {
-    dispatch(addItem(item));
-  };
-
-  const removeItemFromCart = (e, id) => {
-    dispatch(removeItem(id));
-  };
-
   return (
     <>
       {menu.map((menuItem) => {
@@ -52,30 +28,7 @@ const ItemCard = ({ menu }) => {
               </div>
               <div className="w-3/12 p-5 flex flex-col items-center">
                 <img src={MEDIA_LINKS + imageId} className="w-full" />
-                {totalItems[id] ? (
-                  <div className="w-[100px] p-1 relative flex justify-center bg-slate-100 font-bold text-green-600 border shadow-xl bottom-9">
-                    <button
-                      className="w-[30px] flex justify-center items-center"
-                      onClick={(e) => removeItemFromCart(e, id)}
-                    >
-                      <FaMinus />
-                    </button>
-                    <div className="w-[30px] flex justify-center ">{totalItems[id]}</div>
-                    <button
-                      className="w-[30px] flex justify-center items-center"
-                      onClick={() => addItemToCart(menuItem?.card?.info)}
-                    >
-                      <FaPlus />
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    className="w-[100px] p-1 relative flex justify-center bg-slate-100 font-bold text-green-600 border shadow-xl bottom-9"
-                    onClick={() => addItemToCart(menuItem?.card?.info)}
-                  >
-                    ADD
-                  </button>
-                )}
+                <CartAddButton itemInfo={menuItem?.card?.info} />
               </div>
             </div>
             <p className="h-[1px] bg-gray-400" />
