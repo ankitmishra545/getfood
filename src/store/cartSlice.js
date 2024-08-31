@@ -2,24 +2,33 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: [],
+  initialState: {
+    cartItems: [],
+    restaurant: {},
+  },
   reducers: {
     addItem: (state, action) => {
-      state.push(action.payload);
+      state.cartItems.push(action.payload);
     },
 
     removeItem: (state, action) => {
-      const itemIndex = state.findIndex((item) => item.id == action.payload);
-      state = state.splice(itemIndex, 1);
+      const itemIndex = state.cartItems.findIndex((item) => item.id == action.payload);
+      state.cartItems.splice(itemIndex, 1);
     },
 
     clearItem: (state, action) => {
-      state = state.filter((item) => item.id !== action.payload);
-      // console.log(state.filter((item) => item.id !== action.payload));
+      state.cartItems = state.cartItems.filter((item) => item.id !== action.payload);
+    },
+
+    addRestaurant: (state, action) => {
+      if (state.restaurant.id !== action.payload.id) {
+        state.cartItems.length = 0;
+        state.restaurant = action.payload;
+      }
     },
   },
 });
 
-export const { addItem, removeItem, clearItem } = cartSlice.actions;
+export const { addItem, removeItem, clearItem, addRestaurant } = cartSlice.actions;
 
 export default cartSlice.reducer;

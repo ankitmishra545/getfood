@@ -10,12 +10,10 @@ const CartItem = ({ itemInfo }) => {
   const { name, isVeg, id, price, defaultPrice } = itemInfo;
 
   const itemsCountObject = useCartItem();
-  console.log(itemsCountObject);
 
   const itemCount = itemsCountObject[id];
 
   const handleClearItem = () => {
-    // console.log("handleclearitem");
     dispatch(clearItem(id));
   };
 

@@ -4,6 +4,7 @@ import { LuDot } from "react-icons/lu";
 
 const RestaurantCard = ({ resData }) => {
   const { name, avgRating, locality, costForTwo, cloudinaryImageId, cuisines, sla } = resData?.info;
+
   return (
     <div className="w-[300px] mb-3 mx-2 p-3 h-[400px] hover:bg-gray-100 hover:p-1">
       <div>

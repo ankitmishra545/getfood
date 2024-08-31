@@ -7,6 +7,7 @@ import { LuDot } from "react-icons/lu";
 import { GiFlowerEmblem } from "react-icons/gi";
 import RestaurantMenuCategory from "./RestaurantMenuCategory";
 import { useState } from "react";
+import RestaurantContext from "../utils/RestaurantContext.js";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -16,21 +17,13 @@ const RestaurantMenu = () => {
 
   if (fetchedData === null) return <Shimmer />;
 
-  const {
-    name,
-    avgRatingString,
-    totalRatingsString,
-    costForTwoMessage,
-    sla,
-    cuisines,
-  } = fetchedData.cards[2].card.card.info;
+  const { info } = fetchedData.cards[2].card.card;
 
-  const ItemCategory =
-    fetchedData.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter(
-      (x) =>
-        x.card.card["@type"] ===
-        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-    );
+  const { name, avgRatingString, totalRatingsString, costForTwoMessage, sla, cuisines } = info;
+
+  const ItemCategory = fetchedData.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter(
+    (x) => x.card.card["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
 
   return (
     <div className="m-auto w-7/12 mt-10">
@@ -40,9 +33,7 @@ const RestaurantMenu = () => {
           <span>
             <MdStars color="green" size="1.5em" />
           </span>
-          <span className="ml-1">
-            {avgRatingString + " (" + totalRatingsString + ")"}
-          </span>
+          <span className="ml-1">{avgRatingString + " (" + totalRatingsString + ")"}</span>
           <span>
             <LuDot color="gray" size="1.5em" />
           </span>
@@ -52,28 +43,25 @@ const RestaurantMenu = () => {
           <p className="mr-5">{sla.lastMileTravelString}</p>
           <p>{sla.slaString}</p>
         </div>
-        <p className="underline decoration-[#FF5200] text-[#FF5200] font-bold">
-          {cuisines.join(", ")}
-        </p>
+        <p className="underline decoration-[#FF5200] text-[#FF5200] font-bold">{cuisines.join(", ")}</p>
       </div>
       <div className="flex justify-center h-20 my-3 items-center">
         <GiFlowerEmblem size=".6em" />
-        <span className="mx-3 text-xl font-semibold tracking-[0.25em]">
-          MENU
-        </span>
+        <span className="mx-3 text-xl font-semibold tracking-[0.25em]">MENU</span>
         <GiFlowerEmblem size=".6em" />
       </div>
 
       <div>
         {ItemCategory.map((category, index) => {
           return (
-            <RestaurantMenuCategory
-              key={category.card.card.title}
-              menuData={category}
-              showItemsList={showItemsList === index}
-              setShowItemsList={setShowItemsList}
-              index={index}
-            />
+            <RestaurantContext.Provider value={{ restaurantInfo: info }} key={category.card.card.title}>
+              <RestaurantMenuCategory
+                menuData={category}
+                showItemsList={showItemsList === index}
+                setShowItemsList={setShowItemsList}
+                index={index}
+              />
+            </RestaurantContext.Provider>
           );
         })}
       </div>

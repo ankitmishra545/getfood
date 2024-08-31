@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const useCartItem = () => {
-  const itemsInCart = useSelector((store) => store.cart);
+  const itemsInCart = useSelector((store) => store.cart.cartItems);
 
   const totalItems = itemsInCart.reduce((acc, curr) => {
     if (acc[curr.id]) {

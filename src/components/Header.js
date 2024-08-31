@@ -5,10 +5,9 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const [btnName, setBtnName] = useState("Login");
   const [webName, setWebName] = useState("Grocery");
 
-  const numberOfItems = useSelector((store) => store.cart.length);
+  const numberOfItems = useSelector((store) => store.cart.cartItems.length);
 
   return (
     <div className="w-full flex justify-between px-10 bg-pink-200">
@@ -35,15 +34,12 @@ const Header = () => {
           <Link to="/contact">Contact Us</Link>
         </li>
         <li className="mx-3 relative cursor-pointer">
-          <Link to="/cart">
+          <Link to={numberOfItems && "/cart"}>
             <IoFastFoodOutline size="2rem" color="#cc4137" />
             <span className="absolute bottom-3 left-8 font-bold text-orange-800 text-lg bg-yellow-200 px-1 rounded-full">
               {numberOfItems}
             </span>
           </Link>
-        </li>
-        <li className="mx-3">
-          <button onClick={() => (btnName === "Login" ? setBtnName("Logout") : setBtnName("Login"))}>{btnName}</button>
         </li>
       </ul>
     </div>
