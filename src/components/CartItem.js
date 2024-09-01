@@ -1,17 +1,12 @@
 import { FaCircle } from "react-icons/fa";
 import { TiArrowSortedUp } from "react-icons/ti";
 import AddRemoveButton from "./AddRemoveButton";
-import useCartItem from "../utils/useCartItem";
 import { useDispatch } from "react-redux";
 import { clearItem } from "../store/cartSlice.js";
 
-const CartItem = ({ itemInfo }) => {
+const CartItem = ({ itemInfo, numberOfItemsInCart }) => {
   const dispatch = useDispatch();
   const { name, isVeg, id, price, defaultPrice } = itemInfo;
-
-  const itemsCountObject = useCartItem();
-
-  const itemCount = itemsCountObject[id];
 
   const handleClearItem = () => {
     dispatch(clearItem(id));
@@ -19,7 +14,7 @@ const CartItem = ({ itemInfo }) => {
 
   return (
     <div className="w-full bg-yellow-100 mb-5 p-2 flex items-center justify-between text-[#282c3f] font-serif">
-      <div className="flex items-center">
+      <div className="flex items-center w-5/12">
         <div
           className={`w-[10px] h-[10px] flex items-center justify-center border-2 mr-2 ${
             isVeg ? "border-green-600" : "border-red-400"
@@ -29,11 +24,11 @@ const CartItem = ({ itemInfo }) => {
         </div>
         <p className="text-xs">{name}</p>
       </div>
-      <div className="w-[80px] p-1 flex justify-center bg-slate-100 font-bold text-green-600 border mx-2">
-        <AddRemoveButton id={id} itemInfo={itemInfo} totalItem={itemCount} />
+      <div className="w-1/12 p-1 flex justify-center bg-slate-100 font-bold text-green-600 border mx-2">
+        <AddRemoveButton id={id} itemInfo={itemInfo} totalItem={numberOfItemsInCart} />
       </div>
-      <div className="font-sans text-[#282c3f]">₹ {(itemCount * (price ?? defaultPrice)) / 100}</div>
-      <button className="bg-gray-200 px-2 rounded-lg" onClick={handleClearItem}>
+      <div className="w-3/12 font-sans text-[#282c3f]">₹ {(numberOfItemsInCart * (price ?? defaultPrice)) / 100}</div>
+      <button className="w-1/12 bg-gray-200 px-2 rounded-lg" onClick={handleClearItem}>
         Clear
       </button>
     </div>
