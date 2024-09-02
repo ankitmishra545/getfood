@@ -5,6 +5,7 @@ const cartSlice = createSlice({
   initialState: {
     cartItems: [],
     restaurant: {},
+    coupon: {},
   },
   reducers: {
     addItem: (state, action) => {
@@ -24,6 +25,14 @@ const cartSlice = createSlice({
       state.cartItems.length = 0;
     },
 
+    addCoupon: (state, action) => {
+      state.coupon = action.payload;
+    },
+
+    removeCoupon: (state, action) => {
+      state.coupon = {};
+    },
+
     addRestaurant: (state, action) => {
       if (state.restaurant.id !== action.payload.id) {
         state.cartItems.length = 0;
@@ -33,6 +42,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, clearItem, clearCart, addRestaurant } = cartSlice.actions;
+export const { addItem, removeItem, clearItem, clearCart, addRestaurant, addCoupon, removeCoupon } = cartSlice.actions;
 
 export default cartSlice.reducer;

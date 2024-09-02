@@ -9,7 +9,7 @@ const DeliveryTip = ({ onClick }) => {
     onClick(e.target.value);
   };
   return (
-    <div className="px-3">
+    <div className="px-3 bg-white p-3 my-3">
       <h4 className="text-sm font-bold">Say thanks with a Tip</h4>
       <p className="text-sm text-[#686B78]">
         Day & night, our delivery partners bring your favourite meals. Thanks them with a tip

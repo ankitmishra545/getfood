@@ -17,56 +17,11 @@ const Cart = () => {
   const { name, city, cloudinaryImageId, sla, aggregatedDiscountInfo, feeDetails } = restaurant;
   const { lastMileTravel, minDeliveryTime, maxDeliveryTime } = sla;
 
-  const discount = aggregatedDiscountInfo.descriptionList.filter((discount) =>
+  const discountInfo = aggregatedDiscountInfo.descriptionList.filter((discount) =>
     ["Flat", "Percentage"].includes(discount.discountType)
   );
 
-  let discountedBill;
-
-  console.log(discount);
-  let offerStartIndex;
-  let offerEndIndex;
-  let offer;
-  let maxDiscountStartIndex;
-  let maxDiscountEndIndex;
-  let maxDiscount;
-  let match;
-  let calDiscount;
-  discount.forEach((d) => {
-    const str = d.meta;
-    if (d.discountType === "Percentage") {
-      offerStartIndex = 0;
-      offerEndIndex = str.indexOf("%");
-      maxDiscountStartIndex = str.indexOf("₹");
-
-      match = str.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
-      maxDiscountEndIndex = str.indexOf(" |");
-      offer = str.slice(offerStartIndex, offerEndIndex);
-      maxDiscount = str.slice(maxDiscountStartIndex + 1, maxDiscountEndIndex);
-
-      calDiscount = ((itemsCountObject["price"] / 10000) * +offer).toFixed(2);
-      if (calDiscount > +maxDiscount) {
-        calDiscount = +maxDiscount;
-      }
-      console.log("calDiscount", calDiscount);
-    } else {
-      offerStartIndex = str.indexOf("₹") + 1;
-      offerEndIndex = str.indexOf(" off");
-      maxDiscountStartIndex = str.indexOf("₹", offerEndIndex);
-      match = str.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
-      maxDiscountEndIndex = str.indexOf(" |");
-      offer = str.slice(offerStartIndex, offerEndIndex);
-      maxDiscount = str.slice(maxDiscountStartIndex + 1, maxDiscountEndIndex);
-    }
-    // match = str.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
-    // maxDiscountEndIndex = str.indexOf(" |");
-    // offer = str.slice(offerStartIndex, offerEndIndex);
-    // maxDiscount = str.slice(maxDiscountStartIndex + 1, maxDiscountEndIndex);
-    // console.log(d.discountType, "offer", offer, "maxDiscount", maxDiscount, "match:", match[0]);
-    // if (d.discount === "Percentage") {
-
-    // }
-  });
+  const billAmount = itemsCountObject["price"] / 100;
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -111,14 +66,11 @@ const Cart = () => {
         const { id } = item;
         return <CartItem key={id + index} itemInfo={item} numberOfItemsInCart={itemsCountObject[id]} />;
       })}
-
       <Bill
-        billAmount={itemsCountObject["price"] / 100 - calDiscount}
-        billDiscount={calDiscount}
-        charges={((itemsCountObject["price"] / 10000) * 18).toFixed(2)}
-        platformFee={lastMileTravel * 10 < 20 ? lastMileTravel * 10 : 20}
+        billAmount={billAmount}
         lastMileTravel={lastMileTravel}
-        deliveryFee={feeDetails.totalFee / 100}
+        deliveryFee={+(feeDetails.totalFee / 100)}
+        discountInfo={discountInfo}
       />
     </div>
   );
