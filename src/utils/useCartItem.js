@@ -10,7 +10,7 @@ const useCartItem = () => {
       } else {
         acc[curr.id] = 1;
       }
-      acc["price"] = acc["price"] + curr.price;
+      acc["price"] = acc["price"] + (curr.price ?? curr.defaultPrice);
       return acc;
     },
     { price: 0 }

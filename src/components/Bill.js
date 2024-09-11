@@ -5,6 +5,7 @@ import BillSection from "./BillSection";
 import calculateBillInfo from "../utils/helper";
 import Coupon from "./Coupon";
 import { useSelector } from "react-redux";
+import ProceedButton from "./ProceedButton";
 
 const Bill = ({ billAmount, lastMileTravel, deliveryFee, discountInfo }) => {
   const [deliveryTip, setDeliveryTip] = useState(0);
@@ -15,7 +16,6 @@ const Bill = ({ billAmount, lastMileTravel, deliveryFee, discountInfo }) => {
   };
 
   const { platformFee, tax, couponInfo } = calculateBillInfo(discountInfo, billAmount, lastMileTravel);
-  // console.log(billAmount, deliveryFee, platformFee, tax, deliveryTip, discount);
   const totalBill = (billAmount + deliveryFee + platformFee + tax + deliveryTip - discount).toFixed(2);
   return (
     <>
@@ -47,9 +47,7 @@ const Bill = ({ billAmount, lastMileTravel, deliveryFee, discountInfo }) => {
           <p className="text-lg">{totalBill}</p>
         </div>
       </div>
-      <div className="uppercase my-5 flex items-center justify-center bg-orange-500 h-14 rounded-lg text-white font-bold text-xl">
-        Proceed to payment
-      </div>
+      <ProceedButton text="Proceed to payment" />
     </>
   );
 };

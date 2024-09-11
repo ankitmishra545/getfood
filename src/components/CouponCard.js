@@ -4,6 +4,7 @@ import { addCoupon, removeCoupon } from "../store/cartSlice";
 import { useState } from "react";
 
 const CouponCard = ({ couponDetail }) => {
+  console.log(couponDetail);
   const { code, discount, minOrderValue, discountType } = couponDetail;
 
   const dispatch = useDispatch();
@@ -17,8 +18,6 @@ const CouponCard = ({ couponDetail }) => {
     }
     setIsCouponApplied(!isCouponApplied);
   };
-
-  console.log(isCouponApplied);
 
   return (
     <div className="border-2 shadow-lg py-5 my-3 mx-16 px-8">

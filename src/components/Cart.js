@@ -45,7 +45,7 @@ const Cart = () => {
   }, [uniqueItemList]);
 
   return (
-    <div className="mt-10 mx-20 border border-spacing-1 min-h-screen py-5 px-10 bg-red-100">
+    <div className=" mx-20 border border-spacing-1 min-h-screen py-5 px-10 bg-red-100">
       {uniqueItemList.length > 0 && (
         <div className="flex justify-between">
           <div className="flex mb-5 cursor-pointer" onClick={() => navigate("/restaurant/" + restaurant.id)}>
