@@ -20,7 +20,7 @@ const DeliveryTip = ({ onClick }) => {
           const className =
             "text-center  w-20 p-2 border-2 border-gray-300 shadow-lg rounded-lg hover:opacity-60 cursor-pointer";
           return (
-            <div className={isIndex ? className + " relative" : className} onClick={() => onClick(value)}>
+            <div key={value} className={isIndex ? className + " relative" : className} onClick={() => onClick(value)}>
               ₹ {value}
               {isIndex && (
                 <div className="absolute right-[-2px] text-xs bg-orange-500 p-1 w-20 text-white">Most Tipped</div>
