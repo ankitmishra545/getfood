@@ -1,12 +1,10 @@
-const AccountActionButton = ({ bgColor = "white", textColor = "green", questionText, text, setHasAccount }) => {
-  const backgroundColor = bgColor === "white" ? `bg-${bgColor}` : `bg-${bgColor}-600`;
-  const color = textColor === "white" ? `text-${textColor}` : `text-${textColor}-600`;
-
+const AccountActionButton = ({ bgColor = "white", textColor = "#60b246", questionText, text, setHasAccount }) => {
   return (
     <>
       <div
-        className={`${color} ${backgroundColor} p-2 text-center w-full border-green-500 border-2 mt-3 hover:cursor-pointer`}
+        className={`p-1 text-center w-52 me-3 border-green-500 border-2 hover:cursor-pointer`}
         onClick={() => setHasAccount(text === "log in")}
+        style={{ color: textColor, background: bgColor }}
       >
         <p className="text-xs">{questionText}</p>
         <p className="text-lg font-bold uppercase">{text}</p>
