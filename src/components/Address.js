@@ -4,7 +4,7 @@ import { MdWorkOutline } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
 import { useState } from "react";
 
-const ADDRESS_FIELD = ["address", "house/flat no", " landmark"];
+const ADDRESS_FIELD = ["address", "house/flat no", "landmark"];
 
 const TAG_AS = [
   {
@@ -32,20 +32,29 @@ const Address = () => {
     setAddress({ ...address, tagName: e.target.name });
   };
 
+  const handleClick = () => {
+    localStorage.setItem("address", address.address);
+    localStorage.setItem("houseNumber", address["house/flat no"]);
+    localStorage.setItem("landmark", address.landmark);
+    localStorage.setItem("tag", address.tagName);
+  };
+
   return (
     <div className="bg-white p-8">
       <h2 className="text-[#282c3f] font-bold text-lg pb-5">Save delivery location</h2>
-      {ADDRESS_FIELD.map((field) => (
-        <div key={field} className="flex flex-col py-2">
-          <label className="uppercase text-[#7e808c] text-sm">{field}</label>
-          <input
-            name={field}
-            type="text"
-            className="border-b-2 px-2 pt-2 focus:outline-none "
-            onChange={handleChange}
-          />
-        </div>
-      ))}
+      {ADDRESS_FIELD.map((field) => {
+        return (
+          <div key={field} className="flex flex-col py-2">
+            <label className="uppercase text-[#7e808c] text-sm">{field}</label>
+            <input
+              name={field}
+              type="text"
+              className="border-b-2 px-2 pt-2 focus:outline-none "
+              onChange={handleChange}
+            />
+          </div>
+        );
+      })}
       <div>
         <label className="uppercase text-[#7e808c] text-sm">TAG AS</label>
         <div className="flex justify-between pt-3">
@@ -63,7 +72,7 @@ const Address = () => {
           ))}
         </div>
       </div>
-      <ProceedButton text="save and proceed" />
+      <ProceedButton text="save and proceed" onClick={handleClick} />
     </div>
   );
 };

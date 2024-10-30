@@ -11,3 +11,18 @@ export const RESTAURANT_API =
 
 export const IMAGE_LOGIN =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_147,h_140/Image-login_btpq7r";
+
+export const SIGN_UP = [
+  {
+    name: "phonenumber",
+    label: "Phone number",
+  },
+  {
+    name: "name",
+    label: "Name",
+  },
+  {
+    name: "email",
+    label: "Email",
+  },
+];

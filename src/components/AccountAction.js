@@ -2,21 +2,7 @@ import { useState } from "react";
 import AccountActionButton from "./AccountActionButton";
 import FormInput from "./FormInput";
 import ProceedButton from "./ProceedButton";
-
-const SIGN_UP = [
-  {
-    name: "phonenumber",
-    label: "Phone number",
-  },
-  {
-    name: "name",
-    label: "Name",
-  },
-  {
-    name: "email",
-    label: "Email",
-  },
-];
+import { SIGN_UP } from "../utils/constant";
 
 const AccountAction = ({ setIsLoggedIn }) => {
   const [hasAccount, setHasAccount] = useState(null);

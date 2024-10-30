@@ -3,6 +3,7 @@ import { useState } from "react";
 import AccountAction from "./AccountAction";
 import Address from "./Address";
 import { IoLocationOutline } from "react-icons/io5";
+import { IMAGE_LOGIN } from "../utils/constant.js";
 
 const Account = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,17 +37,21 @@ const Account = () => {
           )}
         </div>
         <div>
-          <img
-            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_147,h_140/Image-login_btpq7r"
-            alt="login-image"
-          />
+          <img src={IMAGE_LOGIN} alt="login-image" />
         </div>
       </div>
       <div className="relative">
         <div className="absolute left-[-40px] top-8 border-2 bg-white p-2 shadow-xl">
           <IoLocationOutline size="30px" />
         </div>
-        <Address />
+        {/* <Address /> */}
+        <div className="bg-white p-8">
+          <h2>Your Address</h2>
+          <p>Kammareddy</p>
+          <p>4/6</p>
+          <p>Railway station</p>
+          <p>Tag</p>
+        </div>
       </div>
     </div>
   );
