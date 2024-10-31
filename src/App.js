@@ -12,6 +12,7 @@ import appStore from "./store/appStore";
 import Cart from "./components/Cart";
 import Account from "./components/Account";
 import CartContainer from "./components/CartContainer";
+import Checkout from "./components/checkout/Checkout";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
@@ -44,8 +45,9 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/cart",
-        element: <CartContainer />,
+        path: "/checkout",
+        // element: <CartContainer />,
+        element: <Checkout />,
       },
       {
         path: "/restaurant/:resId",

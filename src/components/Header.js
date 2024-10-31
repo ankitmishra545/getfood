@@ -39,7 +39,7 @@ const Header = () => {
           <button onClick={() => setIsModelOpen(true)}>Sign In</button>
         </li>
         <li className="mx-3 relative cursor-pointer">
-          <Link to={numberOfItems && "/cart"}>
+          <Link to="/checkout">
             <IoFastFoodOutline size="2rem" color="#cc4137" />
             <span className="absolute bottom-3 left-8 font-bold text-orange-800 text-lg bg-yellow-200 px-1 rounded-full">
               {numberOfItems}
