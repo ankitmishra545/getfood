@@ -3,7 +3,6 @@ import { HEADER_LOGO } from "../utils/constant";
 import { Link } from "react-router-dom";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import Account from "./Account.js";
 import AccountModel from "./sign_in/AccountModel";
 
 const Header = () => {
