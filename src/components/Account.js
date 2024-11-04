@@ -17,23 +17,23 @@ const Account = () => {
   return (
     <div className="flex flex-col">
       <div className="flex justify-between items-center bg-white border-2 p-8 mb-5">
-        <div className="flex">
+        <div>
           {!isLoggedIn && (
-            <div>
+            <>
               <h2 className="text-[#282c3f] font-bold text-lg">Account</h2>
               <p className="text-[#7e808c] text-sm">To place your order now, fill some basic details</p>
               <AccountAction setIsLoggedIn={setIsLoggedIn} />
-            </div>
+            </>
           )}
           {isLoggedIn && (
-            <div>
+            <>
               <h2 className="text-lg font-extrabold">Account Info</h2>
               <div className="pt-5">
                 <h4 className="font-semibold">{userInfo.name}</h4>
                 <p className="text-sm py-1 ">{userInfo.phonenumber}</p>
                 <p className="text-xs text-[#7e808c]">{userInfo.email}</p>
               </div>
-            </div>
+            </>
           )}
         </div>
         <div>

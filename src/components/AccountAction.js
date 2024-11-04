@@ -36,52 +36,44 @@ const AccountAction = ({ setIsLoggedIn }) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
 
+  if (hasAccount === null) {
+    return (
+      <div className="flex flex-wrap py-10">
+        <AccountActionButton
+          key="signup"
+          bgColor="#60b246"
+          textColor="white"
+          text="sign up"
+          questionText="New to Swiggy?"
+          setHasAccount={setHasAccount}
+        />
+        <AccountActionButton
+          key="login"
+          text="log in"
+          textColor="#60b246"
+          questionText="Have an account?"
+          setHasAccount={setHasAccount}
+        />
+      </div>
+    );
+  }
+
   return (
-    <div>
-      {hasAccount === null && (
-        <div className="flex flex-wrap py-10">
-          <AccountActionButton
-            key="signup"
-            bgColor="#60b246"
-            textColor="white"
-            text="sign up"
-            questionText="New to Swiggy?"
-            setHasAccount={setHasAccount}
-          />
-          <AccountActionButton
-            key="login"
-            text="log in"
-            textColor="#60b246"
-            questionText="Have an account?"
-            setHasAccount={setHasAccount}
-          />
-        </div>
-      )}
-      {hasAccount && (
-        <div>
-          <div className="flex flex-wrap text-xs py-3">
-            <p className="text-[#7e808c]">Enter login details or</p>
-            <p
-              className="text-amber-600 ps-1 hover:cursor-pointer hover:underline"
-              onClick={() => setHasAccount(false)}
-            >
-              {" "}
-              create an account
-            </p>
-          </div>
-          <FormInput label="Phone number" name="loginNumber" isValue={info.loginNumber} onChange={handleChangeInput} />
-          <p className="text-red-400 text-xs">{message}</p>
-          <ProceedButton text="Login" bgColor="#60b246" onClick={handleLogin} />
-        </div>
-      )}
-      {hasAccount === false && (
-        <div>
-          <div className=" flex flex-wrap text-xs py-3">
-            <p className="text-[#7e808c]">Sign up or</p>
-            <p className="text-amber-600 ps-1 hover:cursor-pointer hover:underline" onClick={() => setHasAccount(true)}>
-              log in to your account
-            </p>
-          </div>
+    <>
+      <div className="flex flex-wrap text-xs py-3">
+        <p className="text-[#7e808c]">{hasAccount ? "Enter login details" : "Sign up"} or</p>
+        <p
+          className="text-amber-600 ps-1 hover:cursor-pointer hover:underline"
+          onClick={() => setHasAccount(!hasAccount)}
+        >
+          {" "}
+          {hasAccount ? "create an account" : "log in to your account"}
+        </p>
+      </div>
+      {hasAccount ? (
+        <FormInput label="Phone number" name="loginNumber" isValue={info.loginNumber} onChange={handleChangeInput} />
+      ) : (
+        <>
           {SIGN_UP.map((field) => (
             <FormInput
               name={field.name}
@@ -91,12 +83,16 @@ const AccountAction = ({ setIsLoggedIn }) => {
               isValue={info[field.name]}
             />
           ))}
-          <p className="text-red-400 text-xs h-4">{message}</p>
-          <ProceedButton bgColor="#60b246" text="Continue" onClick={handleSignup} />
-        </div>
+        </>
       )}
-    </div>
+
+      <p className="text-red-400 text-xs">{message}</p>
+      <ProceedButton
+        text={hasAccount ? "Login" : "Continue"}
+        bgColor="#60b246"
+        onClick={hasAccount ? handleLogin : handleSignup}
+      />
+    </>
   );
 };
-
 export default AccountAction;
