@@ -1,29 +1,30 @@
 import { useState } from "react";
 import CouponCard from "./CouponCard";
+import { RiDiscountPercentLine } from "react-icons/ri";
 
 const Coupon = ({ couponInfo }) => {
-  const [openCoupon, setOpenCoupon] = useState(false);
+  const [isCouponOpened, setIsCouponOpened] = useState(false);
+
+  const coupanMessage = isCouponOpened ? "Apply Coupon" : "Great deal you're missing out on!";
   return (
-    <div className="bg-white p-5">
-      {openCoupon ? (
-        <div className="text-xl font-bold mb-10">Apply Coupon</div>
-      ) : (
-        <div className="flex justify-between">
-          <h2 className="font-bold text-xl flex items-center">Great deal you're missing out on!</h2>
-          <button
-            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-bold border-4 border-orange-500 text-xl shadow-lg p-3 hover:opacity-80 "
-            onClick={() => setOpenCoupon(true)}
-          >
-            View Coupons
-          </button>
-        </div>
-      )}
-      {openCoupon && (
-        <div>
+    <div className="bg-white p-5 w-full">
+      <h2 className="font-bold text-lg flex gap-2 items-center">
+        <RiDiscountPercentLine />
+        {coupanMessage}
+      </h2>
+      {isCouponOpened ? (
+        <>
           {couponInfo.map((coupon, i) => (
             <CouponCard key={i} couponDetail={coupon} />
           ))}
-        </div>
+        </>
+      ) : (
+        <button
+          className="border-2 border-dashed text-sm shadow-lg p-1 hover:opacity-80 "
+          onClick={() => setIsCouponOpened(true)}
+        >
+          View Coupons
+        </button>
       )}
     </div>
   );

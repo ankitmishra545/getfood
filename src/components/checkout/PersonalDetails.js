@@ -1,10 +1,10 @@
-import Cart from "../Cart";
 import { MdAccountBox } from "react-icons/md";
 import UserAccount from "./UserAccount";
 import Address from "./Address";
 import { IoLocationOutline } from "react-icons/io5";
+import CartDetails from "./CartDetails";
 
-const CartContainer = () => {
+const PersonalDetails = () => {
   return (
     <div className="flex justify-center pt-10 bg-[#E9ECEE] w-full px-20">
       <div className="w-7/12">
@@ -20,10 +20,10 @@ const CartContainer = () => {
         </div>
       </div>
       <div className="w-5/12">
-        <Cart />
+        <CartDetails />
       </div>
     </div>
   );
 };
 
-export default CartContainer;
+export default PersonalDetails;

@@ -26,6 +26,7 @@ const cartSlice = createSlice({
     },
 
     addCoupon: (state, action) => {
+      // console.log(action.payload);
       state.coupon = action.payload;
     },
 

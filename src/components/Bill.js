@@ -5,7 +5,6 @@ import BillSection from "./BillSection";
 import calculateBillInfo from "../utils/helper";
 import Coupon from "./Coupon";
 import { useSelector } from "react-redux";
-import ProceedButton from "./ProceedButton";
 
 const Bill = ({ billAmount, lastMileTravel, deliveryFee, discountInfo }) => {
   const [deliveryTip, setDeliveryTip] = useState(0);
@@ -42,12 +41,7 @@ const Bill = ({ billAmount, lastMileTravel, deliveryFee, discountInfo }) => {
         <BillSection key="Platform fee" billName="Platform fee" billValue={platformFee} />
         <BillSection key="GST and Restaurant Charges" billName="GST and Restaurant Charges" billValue={tax} />
         <VerticalSeparator />
-        <div className="flex justify-between mt-2">
-          <p className="uppercase text-lg">to pay</p>
-          <p className="text-lg">{totalBill}</p>
-        </div>
       </div>
-      <ProceedButton text="Proceed to payment" />
     </>
   );
 };
